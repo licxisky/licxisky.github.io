@@ -102,18 +102,18 @@
 <meta property="og:site_name" content="licxisky 的博客">
 <meta property="og:description" content="起2013年发布至今， Docker 一直广受瞩目，被认为可能会改变软件行业。很早就有接触过 Docker ，但由于种种原因，一直没进行过系统的部署。准备给实验室的学弟学妹系统的培训一下实验室的技术栈，就想到了 Docker">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/1935180986.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/567958841.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/3578632474.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/4268348058.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/3433607195.png">
-<meta property="og:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/2432682378.png">
-<meta property="og:updated_time" content="2019-10-14T15:56:00.252Z">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/1935180986.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/567958841.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/3578632474.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/4268348058.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/3433607195.png">
+<meta property="og:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/2432682378.png">
+<meta property="og:updated_time" content="2019-10-14T16:06:33.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Laravel 开发 Docker 容器部署（Windows and Linux） ">
 <meta name="twitter:description" content="起2013年发布至今， Docker 一直广受瞩目，被认为可能会改变软件行业。很早就有接触过 Docker ，但由于种种原因，一直没进行过系统的部署。准备给实验室的学弟学妹系统的培训一下实验室的技术栈，就想到了 Docker">
-<meta name="twitter:image" content="https://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png">
+<meta name="twitter:image" content="http://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png">
 
 
 
@@ -353,16 +353,16 @@
 <h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><ol>
 <li><p>下载 Docker for Windows<br><a href="https://www.docker.com/docker-windows" target="_blank" rel="noopener">https://www.docker.com/docker-windows</a></p>
 </li>
-<li><p>开启 Hyper-V 支持<br><img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png" alt="开启 Hyper-V"> </p>
+<li><p>开启 Hyper-V 支持<br><img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/632317922.png" alt="开启 Hyper-V"> </p>
 </li>
-<li><p>修改 Docker Hub 镜像地址<br><img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/1935180986.png" alt="修改镜像"><br>中科大：<a href="https://docker.mirrors.ustc.edu.cn" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn</a></p>
+<li><p>修改 Docker Hub 镜像地址<br><img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/1935180986.png" alt="修改镜像"><br>中科大：<a href="https://docker.mirrors.ustc.edu.cn" target="_blank" rel="noopener">https://docker.mirrors.ustc.edu.cn</a></p>
 </li>
-<li><p>设置共享磁盘（windows下的坑）<br><img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/567958841.png" alt="共享磁盘"><br>但一般而言，直接 Apply 是会失败的…<br>这是由于 Windows 10 的共享文件夹权限的问题，总结了一下几种方案</p>
+<li><p>设置共享磁盘（windows下的坑）<br><img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/567958841.png" alt="共享磁盘"><br>但一般而言，直接 Apply 是会失败的…<br>这是由于 Windows 10 的共享文件夹权限的问题，总结了一下几种方案</p>
 <ul>
 <li><a href="https://blog.csdn.net/u012680857/article/details/77970351" target="_blank" rel="noopener">Docker for Windows 里的Shared Drives 设置不生效</a></li>
 <li><a href="https://www.zhihu.com/question/57343529" target="_blank" rel="noopener">Docker for Windows10 配置共享文件夹失败该如何解决?</a></li>
 <li><a href="https://newsn.net/say/docker-share-folder.html" target="_blank" rel="noopener">win10系统，docker设置共享文件夹</a></li>
-<li>我的方法<br>在试过【1】和【3】后（充分条件）<br> <img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/3578632474.png" alt="共享选项"><br> <img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/4268348058.png" alt="专用"><br> <img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/3433607195.png" alt="来宾"><br> <img src="https://upyun.lichaoxi.com/usr/uploads/2018/05/2432682378.png" alt="公用"></li>
+<li>我的方法<br>在试过【1】和【3】后（充分条件）<br> <img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/3578632474.png" alt="共享选项"><br> <img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/4268348058.png" alt="专用"><br> <img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/3433607195.png" alt="来宾"><br> <img src="http://upyun.lichaoxi.com/usr/uploads/2018/05/2432682378.png" alt="公用"></li>
 </ul>
 </li>
 <li><p>克隆 laradock 项目</p>
