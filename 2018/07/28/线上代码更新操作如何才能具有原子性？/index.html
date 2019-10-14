@@ -103,7 +103,7 @@
 <meta property="og:description" content="之前思考过一个问题，PHP代码如何在不停用服务的情况下进行更新，直接 COPY 是绝对不可以的，使用 Git 拉取仓库代码实则也不是原子性操作。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lichaoxi.com/wp-content/uploads/2018/07/482d596ff5c30fc3b5bedcba2da5f0a7.png">
-<meta property="og:updated_time" content="2019-10-14T16:33:40.015Z">
+<meta property="og:updated_time" content="2019-10-14T17:12:13.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线上代码更新操作如何才能具有原子性？">
 <meta name="twitter:description" content="之前思考过一个问题，PHP代码如何在不停用服务的情况下进行更新，直接 COPY 是绝对不可以的，使用 Git 拉取仓库代码实则也不是原子性操作。">
@@ -340,7 +340,7 @@
 <p>有空一定要研究一下 Nginx 的源码，组内有个学习讨论，最近分享的是 Nginx，确实学到了很多的知识。</p>
 <p>……</p>
 <p>怎么突然讲到 Nginx ？因为 Nginx 已经帮我们解决了这个问题了。<br>Nginx 中获取时间并不是直接调用系统函数，确实可以，但不推荐。<br>Nginx 缓存了一份时间，具体格式为：</p>
-<p><img src="https://lichaoxi.com/wp-content/uploads/2018/07/482d596ff5c30fc3b5bedcba2da5f0a7.png" alt></p>
+<p><img src="https://lichaoxi.com/wp-content/uploads/2018/07/482d596ff5c30fc3b5bedcba2da5f0a7.png" alt="图片走丢啦。。。"></p>
 <p>Nginx会在很多操作发生的时候进行缓存时间的更新，但 Nginx 本身就是一个支持高并发的应用，很可能时间更新到一半，缓存时间又被调用了，这样就会出现脏数据，取出来的时间是错误的。<br>为了解决这个问题，Nginx 使用了一个长度为 64 的数组，缓存时间变为一个指向数组的指针，每次更新时间就更新当前指向的下一个时间，然后在更新指针。指针的操作是原子性的，这样就能够保证取出的时间一定是正确的时间（格式上正确）。</p>
 <h1 id="服务更新"><a href="#服务更新" class="headerlink" title="服务更新"></a>服务更新</h1><p>因为PHP服务一般都不是分布式的，无法像分布式应用那样更新。为了解决原子性更新操作的问题，有人提出来一个想法，将服务的文件夹设为软链，这样每次更新只需要更新软链即可。</p>
 <p>不知道是不是受 Nginx 启发:sweat_smile:</p>
@@ -465,7 +465,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -478,7 +478,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
