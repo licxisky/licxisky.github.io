@@ -330,21 +330,14 @@
 
       
         
-          
-            <h1 id="为什么会遇到这个问题"><a href="#为什么会遇到这个问题" class="headerlink" title="为什么会遇到这个问题"></a>为什么会遇到这个问题</h1><p>在使用 <a href="https://github.com/illuminate/validation" target="_blank" rel="noopener">illuminate\calidation</a> 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 <a href="https://github.com/laravel/laravel" target="_blank" rel="noopener">Laravel</a> 使用的，无法直接简答地设置语言，只能自己引入语言包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/caouecs/Laravel-lang</span><br></pre></td></tr></table></figure>
-
-<p>这是一个收集了 73 种语言的项目，主要支持 Laravel 的各个子项目，其中就包括 Validation。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--vendor</span><br><span class="line">  |--caouecs</span><br><span class="line">  |  |--Laravel-lang</span><br><span class="line">  |  |  |--src</span><br><span class="line">  |  |  |  |--en</span><br><span class="line">  |  |  |  |  |--validation.php</span><br><span class="line">  |  |  |  |--zh-CN</span><br><span class="line">  |  |  |  |  |--validation.php</span><br></pre></td></tr></table></figure>
-
-<p>这是我们看到的项目最终的目录，我需要定位的是 <code>validation.php</code> 文件的绝对路径，也就是说需要的是 <code>vendor</code> 的路径。</p>
-<p>查了一些资料，有人提供了一些有趣方法方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 如果我们有 $composer 对象，可以直接获取</span><br><span class="line">$composer-&gt;getConfig()-&gt;get(&apos;vendor-dir&apos;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 这个方法可以获取到 composer.json 文件</span><br><span class="line">\Composer\Factory::getComposerFile();</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 通过 ReflectionClass 可以获取到 Composer 加载类的路径，然后获取 vendor 目录</span><br><span class="line">$reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);</span><br><span class="line">$vendorDir = dirname(dirname($reflection-&gt;getFileName()));</span><br></pre></td></tr></table></figure>
-          
+          <h1 id="为什么会遇到这个问题"><a href="#为什么会遇到这个问题" class="headerlink" title="为什么会遇到这个问题"></a>为什么会遇到这个问题</h1><p>在使用 <a href="https://github.com/illuminate/validation" target="_blank" rel="noopener">illuminate\calidation</a> 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 <a href="https://github.com/laravel/laravel" target="_blank" rel="noopener">Laravel</a> 使用的，无法直接简答地设置语言，只能自己引入语言包。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/10/15/Composer-项目如何获取-vendor-目录路径？/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

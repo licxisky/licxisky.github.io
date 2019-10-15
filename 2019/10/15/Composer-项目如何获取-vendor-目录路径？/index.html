@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。 1https://github.com/caouecs/Laravel-lang  这是一个收集了 73 种语言的项目，主要支持 Laravel 的各个子项目，其中就包括">
+<meta name="description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。">
 <meta name="keywords" content="Composer,laravel-lang,Validator">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Composer 项目如何获取 vendor 目录路径？">
 <meta property="og:url" content="https://lichaoxi.com/2019/10/15/Composer-项目如何获取-vendor-目录路径？/index.html">
 <meta property="og:site_name" content="licxisky 的博客">
-<meta property="og:description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。 1https://github.com/caouecs/Laravel-lang  这是一个收集了 73 种语言的项目，主要支持 Laravel 的各个子项目，其中就包括">
+<meta property="og:description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-15T16:27:50.484Z">
+<meta property="og:updated_time" content="2019-10-15T16:29:55.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Composer 项目如何获取 vendor 目录路径？">
-<meta name="twitter:description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。 1https://github.com/caouecs/Laravel-lang  这是一个收集了 73 种语言的项目，主要支持 Laravel 的各个子项目，其中就包括">
+<meta name="twitter:description" content="为什么会遇到这个问题在使用 illuminate\calidation 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 Laravel 使用的，无法直接简答地设置语言，只能自己引入语言包。">
 
 
 
@@ -331,13 +331,15 @@
 
       
         <h1 id="为什么会遇到这个问题"><a href="#为什么会遇到这个问题" class="headerlink" title="为什么会遇到这个问题"></a>为什么会遇到这个问题</h1><p>在使用 <a href="https://github.com/illuminate/validation" target="_blank" rel="noopener">illuminate\calidation</a> 这个包的时候，遇到了国际化的问题，我希望能够有各种语言的错误信息展示，但由于不是配合 <a href="https://github.com/laravel/laravel" target="_blank" rel="noopener">Laravel</a> 使用的，无法直接简答地设置语言，只能自己引入语言包。</p>
+<a id="more"></a>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/caouecs/Laravel-lang</span><br></pre></td></tr></table></figure>
 
 <p>这是一个收集了 73 种语言的项目，主要支持 Laravel 的各个子项目，其中就包括 Validation。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--vendor</span><br><span class="line">  |--caouecs</span><br><span class="line">  |  |--Laravel-lang</span><br><span class="line">  |  |  |--src</span><br><span class="line">  |  |  |  |--en</span><br><span class="line">  |  |  |  |  |--validation.php</span><br><span class="line">  |  |  |  |--zh-CN</span><br><span class="line">  |  |  |  |  |--validation.php</span><br></pre></td></tr></table></figure>
 
 <p>这是我们看到的项目最终的目录，我需要定位的是 <code>validation.php</code> 文件的绝对路径，也就是说需要的是 <code>vendor</code> 的路径。</p>
-<p>查了一些资料，有人提供了一些有趣方法方法：</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>查了一些资料，有人提供了一些有趣方法方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 如果我们有 $composer 对象，可以直接获取</span><br><span class="line">$composer-&gt;getConfig()-&gt;get(&apos;vendor-dir&apos;);</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 这个方法可以获取到 composer.json 文件</span><br><span class="line">\Composer\Factory::getComposerFile();</span><br></pre></td></tr></table></figure>
@@ -520,7 +522,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么会遇到这个问题"><span class="nav-number">1.</span> <span class="nav-text">为什么会遇到这个问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么会遇到这个问题"><span class="nav-number">1.</span> <span class="nav-text">为什么会遇到这个问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li></ol></div>
             
 
           </div>
