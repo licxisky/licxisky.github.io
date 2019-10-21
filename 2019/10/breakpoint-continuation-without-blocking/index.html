@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="最近遇到了一些程序性能相关的问题，在这里简单记录一下 世界上最好的语言换 PHP7.1 吧，不然谈什么性能">
-<meta name="keywords" content="PHP,性能">
+  <meta name="description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
+<meta name="keywords" content="HTTP,断点续传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何提升PHP性能？">
-<meta property="og:url" content="https://lichaoxi.com/2018/05/How-to-improve-the-performance-of-PHP/index.html">
+<meta property="og:title" content="不分块的断点续传">
+<meta property="og:url" content="https://lichaoxi.com/2019/10/breakpoint-continuation-without-blocking/index.html">
 <meta property="og:site_name" content="licxisky 的博客">
-<meta property="og:description" content="最近遇到了一些程序性能相关的问题，在这里简单记录一下 世界上最好的语言换 PHP7.1 吧，不然谈什么性能">
+<meta property="og:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-16T16:58:21.778Z">
+<meta property="og:updated_time" content="2019-10-21T15:14:37.634Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何提升PHP性能？">
-<meta name="twitter:description" content="最近遇到了一些程序性能相关的问题，在这里简单记录一下 世界上最好的语言换 PHP7.1 吧，不然谈什么性能">
-  <link rel="canonical" href="https://lichaoxi.com/2018/05/How-to-improve-the-performance-of-PHP/">
+<meta name="twitter:title" content="不分块的断点续传">
+<meta name="twitter:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
+  <link rel="canonical" href="https://lichaoxi.com/2019/10/breakpoint-continuation-without-blocking/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>如何提升PHP性能？ | licxisky 的博客</title>
+  <title>不分块的断点续传 | licxisky 的博客</title>
   
 
 
@@ -209,7 +209,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://lichaoxi.com/2018/05/How-to-improve-the-performance-of-PHP/">
+    <link itemprop="mainEntityOfPage" href="https://lichaoxi.com/2019/10/breakpoint-continuation-without-blocking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="licxisky">
@@ -221,7 +221,7 @@
       <meta itemprop="name" content="licxisky 的博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">如何提升PHP性能？
+        <h1 class="post-title" itemprop="name headline">不分块的断点续传
 
           
         </h1>
@@ -237,19 +237,11 @@
                 
               
 
-              <time title="创建时间：2018-05-09 03:28:20" itemprop="dateCreated datePublished" datetime="2018-05-09T03:28:20+08:00">2018-05-09</time>
+              <time title="创建时间：2019-10-21 22:20:26 / 修改时间：23:14:37" itemprop="dateCreated datePublished" datetime="2019-10-21T22:20:26+08:00">2019-10-21</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 00:58:21" itemprop="dateModified" datetime="2019-10-17T00:58:21+08:00">2019-10-17</time>
-              </span>
             
           
 
@@ -264,42 +256,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>最近遇到了一些程序性能相关的问题，在这里简单记录一下</p>
-<h1 id="世界上最好的语言"><a href="#世界上最好的语言" class="headerlink" title="世界上最好的语言"></a>世界上最好的语言</h1><p>换 PHP7.1 吧，不然谈什么性能</p>
-<a id="more"></a>
-
-
-<h1 id="代码层次"><a href="#代码层次" class="headerlink" title="代码层次"></a>代码层次</h1><ol>
-<li>用单引号来包含字符串要比双引号来包含字符串更快一些。因为PHP会在双引号包围的字符串中搜寻变量，单引号则不会。</li>
-<li>如果能将类的方法定义成<code>static</code>，就尽量定义成<code>static</code>，它的速度会提升将近4倍。</li>
-<li><code>$row[&#39;id&#39;]</code> 的速度是 <code>$row[id]</code> 的7倍。</li>
-<li><code>echo</code> 比 <code>print</code> 快，并且使用 <code>echo</code> 的多重参数(译注：指用逗号而不是句点)代替字符串连接，比如 <code>echo $str1,$str2</code>。</li>
-<li>在执行<code>for</code>循环之前确定最大循环数，不要每循环一次都计算最大值，最好运用<code>foreach</code>代替。</li>
-<li>注销那些不用的变量尤其是大数组，以便释放内存。</li>
-<li>尽量避免使用<code>__get</code>，<code>__set</code>，<code>__autoload</code>。</li>
-<li><code>require_once()</code>代价昂贵。</li>
-<li><code>include</code>文件时尽量使用绝对路径，因为它避免了PHP去<code>include_path</code>里查找文件的速度，解析操作系统路径所需的时间会更少。</li>
-<li>如果你想知道脚本开始执行(译注：即服务器端收到客户端请求)的时刻，使用<code>$_SERVER[‘REQUEST_TIME&#39;]</code>要好于<code>time()</code>。</li>
-<li>函数代替正则表达式完成相同功能。</li>
-<li><code>str_replace</code>函数比<code>preg_replace</code>函数快，但<code>strtr</code>函数的效率是<code>str_replace</code>函数的四倍。</li>
-<li>如果一个字符串替换函数，可接受数组或字符作为参数，并且参数长度不太长，那么可以考虑额外写一段替换代码，使得每次传递参数是一个字符，而不是只写一行代码接受数组作为查询和替换的参数。</li>
-<li>使用选择分支语句(译注：即<code>switch case</code>)好于使用多个<code>if，else if</code>语句。</li>
-<li>用<code>@</code>屏蔽错误消息的做法非常低效，极其低效。</li>
-<li>打开<code>apache</code>的<code>mod_deflate</code>模块，可以提高网页的浏览速度。</li>
-<li>数据库连接当使用完毕时应关掉，不要用长连接。</li>
-<li>错误消息代价昂贵。</li>
-<li>在方法中递增局部变量，速度是最快的。几乎与在函数中调用局部变量的速度相当。</li>
-<li>递增一个全局变量要比递增一个局部变量慢2倍。</li>
-<li>递增一个对象属性(如：<code>$this-&gt;prop++</code>)要比递增一个局部变量慢3倍。</li>
-</ol>
-<h1 id="应用层次"><a href="#应用层次" class="headerlink" title="应用层次"></a>应用层次</h1><ol>
-<li>Redis</li>
-<li>Swoole</li>
-<li>数据库连接池</li>
-<li>opcache</li>
-<li>HHVM</li>
-</ol>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>PHP已经很快了，但是还可以更快，想想Facebook，再想想你的小项目<br>平时多注意注意这方面的讯息，说不定哪天就用到了呢…</p>
+        <h1 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h1><p>在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？</p>
+<h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。</p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>经过一番的资料查阅（看了一大堆 google 的文章），我才发现，原来，断点续传和分块的没有必然联系的。</p>
+<p>先说结论：<strong>不分块的断点续传是存在的，但是，分块能够并行上传/下载数据，这样能够速度会更快</strong>。</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>对于下载而言，断点续传非常简单，因为客户端是主动方，我们可以明确地告诉服务器，我要什么？从哪里开始？这也就是所谓的断点续传。同时，我们也可以通过分块来并行下载，这样能够大大提升我们的下载速度。市面上大部分能够提升下载速度的下载器都是这个原理。</p>
+<h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><p>第一次查资料时，我正是因为迷惑于为什么搜索引擎查询到的所有的断点续传的上传方案都是分块所以才继续往下钻研。</p>
+<h3 id="上传文件时的断点续传是可以不分块的，这种方案有两个要求："><a href="#上传文件时的断点续传是可以不分块的，这种方案有两个要求：" class="headerlink" title="上传文件时的断点续传是可以不分块的，这种方案有两个要求："></a>上传文件时的断点续传是可以不分块的，这种方案有两个要求：</h3><ul>
+<li>查询进度的接口</li>
+<li>上传文件的接口要能够自主判断文件上传的进度，在网络中断时，需要能够主动判断当前的传输进度并保存相关信息。</li>
+</ul>
+<h3 id="分块的断点续传也有一些相似的要求："><a href="#分块的断点续传也有一些相似的要求：" class="headerlink" title="分块的断点续传也有一些相似的要求："></a>分块的断点续传也有一些相似的要求：</h3><ul>
+<li>查询进度的接口（这个可以和上传文件的接口合并，上传第一个分块时返回进度）</li>
+<li>上传文件的接口</li>
+</ul>
+<h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><h2 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h2><ul>
+<li>速度更快</li>
+</ul>
+<h2 id="不分块"><a href="#不分块" class="headerlink" title="不分块"></a>不分块</h2><ul>
+<li>断点准确度更高</li>
+</ul>
 
     </div>
 
@@ -315,9 +291,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/HTTP/" rel="tag"># HTTP</a>
             
-              <a href="/tags/性能/" rel="tag"># 性能</a>
+              <a href="/tags/断点续传/" rel="tag"># 断点续传</a>
             
           </div>
         
@@ -327,8 +303,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2018/04/Typecho-QiniuFile/" rel="next" title="QiniuFile - Typecho 七牛云存储插件">
-                  <i class="fa fa-chevron-left"></i> QiniuFile - Typecho 七牛云存储插件
+                <a href="/2019/10/How-to-interact-with-Linux-server/" rel="next" title="如何与通过跳板机登录的 Linux 服务器进行文件交互？">
+                  <i class="fa fa-chevron-left"></i> 如何与通过跳板机登录的 Linux 服务器进行文件交互？
                 </a>
               
             </div>
@@ -336,10 +312,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2018/05/Laravel-docker/" rel="prev" title="Laravel 开发 Docker 容器部署（Windows and Linux） ">
-                  Laravel 开发 Docker 容器部署（Windows and Linux）  <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -388,7 +360,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#世界上最好的语言"><span class="nav-number">1.</span> <span class="nav-text">世界上最好的语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码层次"><span class="nav-number">2.</span> <span class="nav-text">代码层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用层次"><span class="nav-number">3.</span> <span class="nav-text">应用层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么"><span class="nav-number">1.</span> <span class="nav-text">为什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简述"><span class="nav-number">2.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方案"><span class="nav-number">3.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">3.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传"><span class="nav-number">3.2.</span> <span class="nav-text">上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文件时的断点续传是可以不分块的，这种方案有两个要求："><span class="nav-number">3.2.1.</span> <span class="nav-text">上传文件时的断点续传是可以不分块的，这种方案有两个要求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分块的断点续传也有一些相似的要求："><span class="nav-number">3.2.2.</span> <span class="nav-text">分块的断点续传也有一些相似的要求：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优缺点"><span class="nav-number">4.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分块"><span class="nav-number">4.1.</span> <span class="nav-text">分块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不分块"><span class="nav-number">4.2.</span> <span class="nav-text">不分块</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
