@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
+  <meta name="description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？">
 <meta name="keywords" content="HTTP,断点续传">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不分块的断点续传">
 <meta property="og:url" content="https://lichaoxi.com/2019/10/breakpoint-continuation-without-blocking/index.html">
 <meta property="og:site_name" content="licxisky 的博客">
-<meta property="og:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
+<meta property="og:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-21T15:14:37.634Z">
+<meta property="og:updated_time" content="2019-10-21T15:36:17.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不分块的断点续传">
-<meta name="twitter:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？ 简述断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。 方案经过一番的资">
+<meta name="twitter:description" content="为什么在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？">
   <link rel="canonical" href="https://lichaoxi.com/2019/10/breakpoint-continuation-without-blocking/">
 
 
@@ -237,7 +237,7 @@
                 
               
 
-              <time title="创建时间：2019-10-21 22:20:26 / 修改时间：23:14:37" itemprop="dateCreated datePublished" datetime="2019-10-21T22:20:26+08:00">2019-10-21</time>
+              <time title="创建时间：2019-10-21 22:20:26 / 修改时间：23:36:17" itemprop="dateCreated datePublished" datetime="2019-10-21T22:20:26+08:00">2019-10-21</time>
             </span>
           
             
@@ -257,6 +257,8 @@
 
       
         <h1 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h1><p>在和一个同时在讨论断点续传的原理和实现方案时，我发现了一个很奇怪的问题，搜索引擎似乎所有能够查询到的断点续传方案都是分块传输，那么有没有不分块的方案呢？如果有，那么为什么大家都不约而同地不使用呢？</p>
+<a id="more"></a>
+
 <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>断点续传：指的是在上传/下载时，服务端/客户端记录上传/下载的进度，如果碰到网络故障，可以从已经上传/下载地方继续进行，没必要从头开始上传/下载，从而实现节约时间，提升速度。</p>
 <h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><p>经过一番的资料查阅（看了一大堆 google 的文章），我才发现，原来，断点续传和分块的没有必然联系的。</p>
 <p>先说结论：<strong>不分块的断点续传是存在的，但是，分块能够并行上传/下载数据，这样能够速度会更快</strong>。</p>
