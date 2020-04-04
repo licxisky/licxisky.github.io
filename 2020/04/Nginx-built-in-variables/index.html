@@ -55,22 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="说明突然入手一个小项目，要求在网页上点击打印按钮打印机就出打印好的纸，思前想后，找了好多资料，终于找到一个比较通用的方法">
-<meta name="keywords" content="chrome,printer">
+  <meta name="description" content="简介Nginx 配置文件支持很多变量，对于我们在配置相关规则时非常有用">
+<meta name="keywords" content="Nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Chrome 下如何实现免预览打印">
-<meta property="og:url" content="https://lichaoxi.com/2018/03/Preview-free-printing/index.html">
+<meta property="og:title" content="Nginx 配置内置变量">
+<meta property="og:url" content="https://lichaoxi.com/2020/04/Nginx-built-in-variables/index.html">
 <meta property="og:site_name" content="licxisky 的博客">
-<meta property="og:description" content="说明突然入手一个小项目，要求在网页上点击打印按钮打印机就出打印好的纸，思前想后，找了好多资料，终于找到一个比较通用的方法">
+<meta property="og:description" content="简介Nginx 配置文件支持很多变量，对于我们在配置相关规则时非常有用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://lichaoxi.com/uploads/ChromePrintPreview.png">
-<meta property="og:image" content="https://lichaoxi.com/uploads/ChromePrintKiosk.png">
-<meta property="og:updated_time" content="2019-10-16T16:58:21.762Z">
+<meta property="og:updated_time" content="2020-04-04T09:52:36.411Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chrome 下如何实现免预览打印">
-<meta name="twitter:description" content="说明突然入手一个小项目，要求在网页上点击打印按钮打印机就出打印好的纸，思前想后，找了好多资料，终于找到一个比较通用的方法">
-<meta name="twitter:image" content="https://lichaoxi.com/uploads/ChromePrintPreview.png">
-  <link rel="canonical" href="https://lichaoxi.com/2018/03/Preview-free-printing/">
+<meta name="twitter:title" content="Nginx 配置内置变量">
+<meta name="twitter:description" content="简介Nginx 配置文件支持很多变量，对于我们在配置相关规则时非常有用">
+  <link rel="canonical" href="https://lichaoxi.com/2020/04/Nginx-built-in-variables/">
 
 
 <script id="page-configurations">
@@ -84,7 +81,7 @@
   };
 </script>
 
-  <title>Chrome 下如何实现免预览打印 | licxisky 的博客</title>
+  <title>Nginx 配置内置变量 | licxisky 的博客</title>
   
 
 
@@ -212,7 +209,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://lichaoxi.com/2018/03/Preview-free-printing/">
+    <link itemprop="mainEntityOfPage" href="https://lichaoxi.com/2020/04/Nginx-built-in-variables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="licxisky">
@@ -224,7 +221,7 @@
       <meta itemprop="name" content="licxisky 的博客">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Chrome 下如何实现免预览打印
+        <h1 class="post-title" itemprop="name headline">Nginx 配置内置变量
 
           
         </h1>
@@ -240,19 +237,11 @@
                 
               
 
-              <time title="创建时间：2018-03-23 13:05:23" itemprop="dateCreated datePublished" datetime="2018-03-23T13:05:23+08:00">2018-03-23</time>
+              <time title="创建时间：2020-04-04 17:38:06 / 修改时间：17:52:36" itemprop="dateCreated datePublished" datetime="2020-04-04T17:38:06+08:00">2020-04-04</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-17 00:58:21" itemprop="dateModified" datetime="2019-10-17T00:58:21+08:00">2019-10-17</time>
-              </span>
             
           
 
@@ -267,15 +256,257 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>突然入手一个小项目，要求在网页上点击打印按钮打印机就出打印好的纸，思前想后，找了好多资料，终于找到一个比较通用的方法</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nginx 配置文件支持很多变量，对于我们在配置相关规则时非常有用</p>
 <a id="more"></a>
 
-
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><ol>
-<li>在地址栏敲: about:flags ,打开设置界面:<br>停用:Enable Print Preview Registration Promos Windows, Linux, Chrome OS<br><img src="/uploads/ChromePrintPreview.png" alt="ChromePrintPreview.png" title="ChromePrintPreview.png"></li>
-<li>Chrome快捷方式增加: –kiosk-printing<br><img src="/uploads/ChromePrintKiosk.png" alt="ChromePrintKiosk.png" title="ChromePrintKiosk.png"></li>
-</ol>
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>其他还有一些比如使用插件之类的方法一般而言都有限制，总结而来，这种方案快捷方便</p>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$args</td>
+<td>请求中的参数值</td>
+</tr>
+<tr>
+<td>$query_string</td>
+<td>同 <code>$args</code></td>
+</tr>
+<tr>
+<td>$arg_NAME</td>
+<td>GET请求中NAME的值</td>
+</tr>
+<tr>
+<td>$is_args</td>
+<td>如果请求中有参数，值为 <code>?</code>，否则为空字符串</td>
+</tr>
+<tr>
+<td>$uri</td>
+<td>请求中的当前 URI (不带请求参数，参数位于 <code>$args</code> )，可以不同于浏览器传递的 <code>$request_uri</code> 的值，它可以通过内部重定向，或者使用 index 指令进行修改，<code>$uri</code> 不包含主机名，如 <code>/foo/bar.html</code>。</td>
+</tr>
+<tr>
+<td>$document_uri</td>
+<td>同 <code>$uri</code></td>
+</tr>
+<tr>
+<td>$document_root</td>
+<td>当前请求的文档根目录或别名</td>
+</tr>
+<tr>
+<td>$host</td>
+<td>优先级：HTTP 请求行的主机名 &gt; <code>HOST</code>请求头字段 &gt; 符合请求的服务器名.请求中的主机头字段，如果请求中的主机头不可用，则为服务器处理请求的服务器名称</td>
+</tr>
+<tr>
+<td>$hostname</td>
+<td>主机名</td>
+</tr>
+<tr>
+<td>$https</td>
+<td>如果开启了SSL安全模式，值为 <code>on</code>，否则为空字符串。</td>
+</tr>
+<tr>
+<td>$binary_remote_addr</td>
+<td>客户端地址的二进制形式，固定长度为4个字节</td>
+</tr>
+<tr>
+<td>$body_bytes_sent</td>
+<td>传输给客户端的字节数，响应头不计算在内；这个变量和 <code>Apache</code> 的 <code>mod_log_config</code> 模块中的 <code>%B</code> 参数保持兼容</td>
+</tr>
+<tr>
+<td>$bytes_sent</td>
+<td>传输给客户端的字节数</td>
+</tr>
+<tr>
+<td>$connection</td>
+<td>TCP 连接的序列号</td>
+</tr>
+<tr>
+<td>$connection_requests</td>
+<td>TCP 连接当前的请求数量</td>
+</tr>
+<tr>
+<td>$content_length</td>
+<td><code>Content-Length</code> 请求头字段</td>
+</tr>
+<tr>
+<td>$content_type</td>
+<td><code>Content-Type</code> 请求头字段</td>
+</tr>
+<tr>
+<td>$cookie_name</td>
+<td>cookie 名称</td>
+</tr>
+<tr>
+<td>$limit_rate</td>
+<td>用于设置响应的速度限制</td>
+</tr>
+<tr>
+<td>$msec</td>
+<td>当前的 Unix 时间戳</td>
+</tr>
+<tr>
+<td>$nginx_version</td>
+<td>nginx 版本</td>
+</tr>
+<tr>
+<td>$pid</td>
+<td>工作进程的 PID</td>
+</tr>
+<tr>
+<td>$pipe</td>
+<td>如果请求来自管道通信，值为 <code>p</code>，否则为 <code>.</code></td>
+</tr>
+<tr>
+<td>$proxy_protocol_addr</td>
+<td>获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串</td>
+</tr>
+<tr>
+<td>$realpath_root</td>
+<td>当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径</td>
+</tr>
+<tr>
+<td>$remote_addr</td>
+<td>客户端地址</td>
+</tr>
+<tr>
+<td>$remote_port</td>
+<td>客户端端口</td>
+</tr>
+<tr>
+<td>$remote_user</td>
+<td>用于HTTP基础认证服务的用户名</td>
+</tr>
+<tr>
+<td>$request</td>
+<td>代表客户端的请求地址</td>
+</tr>
+<tr>
+<td>$request_body</td>
+<td>客户端的请求主体：此变量可在 <code>location</code> 中使用，将请求主体通过 <code>proxy_pass</code>，<code>fastcgi_pass</code>，<code>uwsgi_pass</code> 和 <code>scgi_pass</code> 传递给下一级的代理服务器</td>
+</tr>
+<tr>
+<td>$request_body_file</td>
+<td>将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置 <code>client_body_in_file_only</code>。如果将次文件传 递给后端的代理服务器，需要禁用 <code>request body</code>，即设置 <code>proxy_pass_request_body off</code>，<code>fastcgi_pass_request_body off</code>，<code>uwsgi_pass_request_body off</code>，<code>or scgi_pass_request_body off</code></td>
+</tr>
+<tr>
+<td>$request_completion</td>
+<td>如果请求成功，值为 <code>OK</code>，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空</td>
+</tr>
+<tr>
+<td>$request_filename</td>
+<td>当前连接请求的文件路径，由 <code>root</code> 或 <code>alias</code> 指令与 URI 请求生成</td>
+</tr>
+<tr>
+<td>$request_length</td>
+<td>请求的长度 (包括请求的地址，http 请求头和请求主体)</td>
+</tr>
+<tr>
+<td>$request_method</td>
+<td>HTTP 请求方法，通常为 <code>GET</code> 或 <code>POST</code></td>
+</tr>
+<tr>
+<td>$request_time</td>
+<td>处理客户端请求使用的时间,单位为秒，精度毫秒；从读入客户端的第一个字节开始，直到把最后一个字符发送给客户端后进行日志写入为止。</td>
+</tr>
+<tr>
+<td>$request_uri</td>
+<td>这个变量等于包含一些客户端请求参数的原始 URI，它无法修改，请查看 <code>$uri</code> 更改或重写 URI，不包含主机名，例如：<code>/cnphp/test.php?arg=freemouse</code></td>
+</tr>
+<tr>
+<td>$scheme</td>
+<td>请求使用的 Web 协议，<code>http</code> 或 <code>https</code></td>
+</tr>
+<tr>
+<td>$server_addr</td>
+<td>服务器端地址，需要注意的是：为了避免访问 linux 系统内核，应将ip地址提前设置在配置文件中</td>
+</tr>
+<tr>
+<td>$server_name</td>
+<td>服务器名</td>
+</tr>
+<tr>
+<td>$server_port</td>
+<td>服务器端口</td>
+</tr>
+<tr>
+<td>$server_protocol</td>
+<td>服务器的HTTP版本，通常为 <code>HTTP/1.0</code> 或 <code>HTTP/1.1</code></td>
+</tr>
+<tr>
+<td>$status</td>
+<td>HTTP响应代码</td>
+</tr>
+<tr>
+<td>$time_iso8601</td>
+<td>服务器时间的 ISO 8610 格式</td>
+</tr>
+<tr>
+<td>$time_local</td>
+<td>服务器时间（LOG Format 格式）</td>
+</tr>
+<tr>
+<td>$cookie_NAME</td>
+<td>客户端请求 Header 头中的 cookie 变量，前缀 <code>$cookie_</code> 加上 cookie 名称的变量，该变量的值即为 cookie 名称的值</td>
+</tr>
+<tr>
+<td>$http_NAME</td>
+<td>匹配任意请求头字段；变量名中的后半部分 NAME 可以替换成任意请求头字段，如在配置文件中需要获取 http 请求头：<code>Accept-Language</code>，<code>$http_accept_language</code> 即可</td>
+</tr>
+<tr>
+<td>$http_cookie</td>
+<td></td>
+</tr>
+<tr>
+<td>$http_host</td>
+<td>请求地址，即浏览器中你输入的地址（IP 或域名）</td>
+</tr>
+<tr>
+<td>$http_referer</td>
+<td>url 跳转来源,用来记录从那个页面链接访问过来的</td>
+</tr>
+<tr>
+<td>$http_user_agent</td>
+<td>用户终端浏览器等信息</td>
+</tr>
+<tr>
+<td>$http_x_forwarded_for</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_NAME</td>
+<td>可以设置任意 http 响应头字段；变量名中的后半部分 NAME 可以替换成任意响应头字段，如需要设置响应头 <code>Content-length</code>，<code>$sent_http_content_length</code> 即可</td>
+</tr>
+<tr>
+<td>$sent_http_cache_control</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_connection</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_content_type</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_keep_alive</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_last_modified</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_location</td>
+<td></td>
+</tr>
+<tr>
+<td>$sent_http_transfer_encoding</td>
+<td></td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -291,9 +522,7 @@
           
           <div class="post-tags">
             
-              <a href="/tags/chrome/" rel="tag"># chrome</a>
-            
-              <a href="/tags/printer/" rel="tag"># printer</a>
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
             
           </div>
         
@@ -303,8 +532,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2018/03/Typecho-AjaxComment/" rel="next" title="AjaxComment - Typecho ajax 评论插件">
-                  <i class="fa fa-chevron-left"></i> AjaxComment - Typecho ajax 评论插件
+                <a href="/2020/04/Nginx-Basic-Authentication/" rel="next" title="Nginx 配置 Basic Auth 登录认证">
+                  <i class="fa fa-chevron-left"></i> Nginx 配置 Basic Auth 登录认证
                 </a>
               
             </div>
@@ -312,10 +541,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2018/04/Typecho-QiniuFile/" rel="prev" title="QiniuFile - Typecho 七牛云存储插件">
-                  QiniuFile - Typecho 七牛云存储插件 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -364,7 +589,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">3.</span> <span class="nav-text">其他</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
