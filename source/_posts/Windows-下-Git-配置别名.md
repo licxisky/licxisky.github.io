@@ -3,10 +3,10 @@ title: Windows 下 Git 配置别名
 urlname: Windows-Git-alias
 date: 2018-03-07 15:22:52
 tags: 
-- windows
-- git
-- linux
-- bash
+- Windows
+- Git
+- Linux
+- Bash
 ---
 经常敲错 `Git` 命令？偶尔会感觉有些命令好长？`alias` 拯救你！
 

@@ -3,10 +3,10 @@ title: 'Laravel 开发 Docker 容器部署（Windows and Linux） '
 urlname: Laravel-docker
 date: 2018-05-25 14:53:40
 tags:
-- windows
-- linux
+- Windows
+- Linux
 - Laravel
-- docker
+- Docker
 ---
 # 起
 2013年发布至今， Docker 一直广受瞩目，被认为可能会改变软件行业。

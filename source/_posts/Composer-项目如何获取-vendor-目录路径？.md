@@ -4,7 +4,7 @@ urlname: How-composer-get-vendor-directory
 date: 2019-10-15 23:16:49
 tags: 
 - Composer
-- laravel-lang
+- Laravel-lang
 - Validator
 ---
 # 为什么

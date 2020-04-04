@@ -3,8 +3,8 @@ title: Material - Typecho 炫酷主题
 urlname: Typecho-Material
 date: 2018-03-05 00:44:42
 tags: 
-- typecho
-- extension
+- Typecho
+- Extension
 - Material
 ---
 说明

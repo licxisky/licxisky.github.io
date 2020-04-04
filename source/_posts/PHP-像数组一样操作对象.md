@@ -5,7 +5,7 @@ date: 2018-10-08 16:04:31
 tags:
 - PHP
 - Collection
-- extension
+- Extension
 - Laravel
 - Array
 ---

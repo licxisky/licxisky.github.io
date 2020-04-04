@@ -3,8 +3,8 @@ title: TeStat - Typecho 留言点赞插件
 urlname: Typecho-TeStat
 date: 2018-03-03 13:58:00
 tags: 
-- typecho
-- extension
+- Typecho
+- Extension
 - TeStat
 ---
 TeStat原插件

@@ -3,10 +3,10 @@ title: AjaxComment - Typecho ajax 评论插件
 urlname: Typecho-AjaxComment
 date: 2018-03-15 14:45:45
 tags:
-- typecho
-- extension
-- ajax
-- comment
+- Typecho
+- Extension
+- Ajax
+- Comment
 ---
 TeComment 原插件
 =============
